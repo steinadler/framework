@@ -7,14 +7,29 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">  
     
+    <!-- 解决Spring的ResponseBody乱码 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >  
+		<property name="messageConverters">   
+			<list>   
+				<bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+					<property name = "supportedMediaTypes"> 
+						<list> 
+							<value>text/html;charset=UTF-8</value>
+						</list>   
+					</property>   
+				</bean>   
+			</list>   
+		</property>  
+	</bean>
+  
 	<!-- 扫描Controller -->  
-    <context:component-scan base-package="com.santrong" use-default-filters="false">
+    <context:component-scan base-package="com.companyname.projectname" use-default-filters="false">
     	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>  
-      
-   	<!-- 注解映射驱动 -->
-    <mvc:annotation-driven/>  
     
+   	<!-- 注解映射驱动 -->
+    <mvc:annotation-driven />
+      
     <!-- 视图解析 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/home/"/>  

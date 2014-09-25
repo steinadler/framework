@@ -1,2 +1,10 @@
 spring-framework-3.2.9.RELEASE
 mybatis-3.2.2
+tomcat-7.0.54
+jdk-7u60-x64
+mysql5.6
+Quartz Scheduler (v2.0.1)
+log4jdbc4-1.2
+proxool-0.9.1
+edtftpj2.4.0
+jquery-ui1.11.1(模块：Core，Widget，Progressbar)

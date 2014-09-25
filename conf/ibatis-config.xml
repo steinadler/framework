@@ -9,7 +9,9 @@
         <!-- <mapper namespace="com.santrong.demo.persistence.DemoMapper" /> -->
         
         
-        <mapper class="com.santrong.demo.mapper.DemoMapper"/>
+        <mapper class="com.companyname.projectname.webpage.demo.mapper.DemoMapper"/>
+        <mapper class="com.companyname.projectname.webpage.home.mapper.MenuMapper"/>
+        <mapper class="com.companyname.projectname.webpage.user.mapper.UserMapper"/>
         
         <!-- <mapper resource="com/santrong/demo/mapper/demo-sqlmap.xml"/> -->
         

@@ -1,0 +1,2 @@
+spring-framework-3.2.9.RELEASE
+mybatis-3.2.2

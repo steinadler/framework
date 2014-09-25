@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>aio</display-name>
+  
+
+  
+  	<listener>
+  		<listener-class>com.santrong.listener.CommonContextListener</listener-class>
+  	</listener>
+  	
+	<filter>  
+		<filter-name>CommonFilter</filter-name>  
+		<filter-class>com.santrong.filter.CommonFilter</filter-class> 
+		<init-param>
+			<!-- 免登陆页面 -->
+			<param-name>passUrls</param-name>
+			<param-value>
+				/
+			</param-value>
+		</init-param>
+	</filter>  
+	<filter-mapping>  
+		<filter-name>CommonFilter</filter-name>  
+		<url-pattern>*.action</url-pattern>		
+	</filter-mapping>
+	<filter-mapping>  
+		<filter-name>CommonFilter</filter-name>  
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+  	
+  	
+	<!-- 第一次启动时调用  -->
+	<servlet>
+  		<servlet-name>INIT_WEB_DATA</servlet-name>
+  		<servlet-class>com.santrong.opt.StartUpAction</servlet-class>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+  
+    <!-- spring配置 -->
+    <servlet>  
+        <servlet-name>spring</servlet-name>  
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+        <param-name>contextConfigLocation</param-name>  
+        <param-value>/WEB-INF/classes/spring-config.xml</param-value>
+    	</init-param>        
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>  
+        <servlet-name>spring</servlet-name>  
+        <url-pattern>*.action</url-pattern>  
+    </servlet-mapping>
+    <servlet-mapping>  
+        <servlet-name>spring</servlet-name>  
+        <url-pattern>/</url-pattern>  
+    </servlet-mapping>
+    
+
+	<!-- 第三方Proxool连接池配置 -->
+	<servlet>  
+		<servlet-name>ServletConfigurator</servlet-name>   
+  		<servlet-class>org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>   
+	 	<init-param>   
+		    <param-name>propertyFile</param-name>
+		    <param-value>WEB-INF/classes/datasource.properties</param-value>
+	  	</init-param>
+  		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+  		<servlet-name>proxool</servlet-name>
+  		<servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>   
+	</servlet>
+	<servlet-mapping>   
+  		<servlet-name>proxool</servlet-name>
+  		<url-pattern>/proxool</url-pattern>
+	</servlet-mapping>
+  
+  	<!-- 静态文档 -->
+	<servlet-mapping>   
+	    <servlet-name>default</servlet-name>  
+	    <url-pattern>/resource/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>   
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	
+    <error-page>  
+        <error-code>404</error-code>  
+        <location>/404.action</location>  
+    </error-page> 
+    
+    <error-page>  
+        <error-code>500</error-code>
+        <location>/500.action</location>  
+    </error-page>
+	
+	<welcome-file-list>
+	  <welcome-file>index.html</welcome-file>
+	  <welcome-file>index.htm</welcome-file>
+	  <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
